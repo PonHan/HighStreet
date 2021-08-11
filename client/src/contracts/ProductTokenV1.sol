@@ -150,7 +150,7 @@ contract ProductTokenV1 is ProductToken {
     return price;
   }
 
-  function setSupplierWallet(address  _supplierWallet) external virtual onlyOwner {
+  function setSupplierWallet(address  _supplierWallet) external virtual onlyCreator {
     require(_supplierWallet!=address(0), "The new supplierWallet address is not valid");
     supplierWallet = _supplierWallet ;
   }
