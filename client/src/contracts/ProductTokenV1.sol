@@ -90,7 +90,7 @@ contract ProductTokenV1 is ProductToken {
     // return change back to the sender.
     if (amount > 0) {                                               // If token transaction went through successfully
       payable(msg.sender).transfer(change.mul(uint256(daieth)).div(10**18));
-      supplierDai = incomingEth.add(10000).div(1000000);
+      supplierDai += incomingEth.mul(10000).div(1000000);
     }
     else {                                                          // If token transaction failed
       payable(msg.sender).transfer(msg.value);                                 
@@ -113,7 +113,7 @@ contract ProductTokenV1 is ProductToken {
     // return change back to the sender.
     if (amount > 0) {                                               // If token transaction went through successfully
       dai.transfer(msg.sender, change);
-      supplierDai = _daiAmount.add(10000).div(1000000);
+      supplierDai += _daiAmount.mul(10000).div(1000000);
     }
     else {                                                          // If token transaction failed
       dai.transfer(msg.sender, _daiAmount);                               
@@ -129,7 +129,7 @@ contract ProductTokenV1 is ProductToken {
  	function sell(uint32 _amount) external virtual onlyIfTradable{
     uint256 returnAmount = _sellForAmount(_amount);
     bool success = dai.transfer(msg.sender, returnAmount.mul(980000).div(1000000));        // ppm of 98%. 2% is the platform transaction fee
-    supplierDai = returnAmount.add(10000).div(1000000);
+    supplierDai += returnAmount.mul(10000).div(1000000);
     require(success, "selling token failed");
   }
 
